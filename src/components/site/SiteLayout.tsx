@@ -143,7 +143,7 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
       <ul className="space-y-2.5 text-sm">
         {links.map(([l, to]) => (
           <li key={l}>
-            <Link to={to} className="opacity-80 transition-opacity hover:opacity-100 hover:text-gold">{l}</Link>
+            <Link to={to as "/"} className="opacity-80 transition-opacity hover:opacity-100 hover:text-gold">{l}</Link>
           </li>
         ))}
       </ul>
@@ -172,7 +172,7 @@ export function PageHeader({ eyebrow, title, intro, image, crumbs }: { eyebrow: 
           {crumbs.map((c) => (
             <span key={c.label} className="flex items-center gap-1">
               <ChevronRight className="h-3 w-3" />
-              {c.to ? <Link to={c.to} className="hover:text-gold">{c.label}</Link> : <span className="text-gold">{c.label}</span>}
+              {c.to ? <Link to={c.to as "/"} className="hover:text-gold">{c.label}</Link> : <span className="text-gold">{c.label}</span>}
             </span>
           ))}
         </nav>
