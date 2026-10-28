@@ -11,14 +11,18 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdmissionsRouteImport } from './routes/admissions'
 import { Route as CampusLifeRouteImport } from './routes/campus-life'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as AcademicsIndexRouteImport } from './routes/academics.index'
 import { Route as AcademicsSlugRouteImport } from './routes/academics.$slug'
 import { Route as PortalIndexRouteImport } from './routes/portal.index'
+import { Route as PortalApplyRouteImport } from './routes/portal.apply'
+import { Route as PortalConfirmationRouteImport } from './routes/portal.confirmation'
 import { Route as PortalLoginRouteImport } from './routes/portal.login'
 import { Route as PortalRegisterRouteImport } from './routes/portal.register'
 
@@ -30,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdmissionsRoute = AdmissionsRouteImport.update({
@@ -45,6 +54,11 @@ const CampusLifeRoute = CampusLifeRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -72,6 +86,16 @@ const PortalIndexRoute = PortalIndexRouteImport.update({
   path: '/portal/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalApplyRoute = PortalApplyRouteImport.update({
+  id: '/portal/apply',
+  path: '/portal/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalConfirmationRoute = PortalConfirmationRouteImport.update({
+  id: '/portal/confirmation',
+  path: '/portal/confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortalLoginRoute = PortalLoginRouteImport.update({
   id: '/portal/login',
   path: '/portal/login',
@@ -86,12 +110,16 @@ const PortalRegisterRoute = PortalRegisterRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/admissions': typeof AdmissionsRoute
   '/campus-life': typeof CampusLifeRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/news': typeof NewsRoute
   '/research': typeof ResearchRoute
   '/academics/$slug': typeof AcademicsSlugRoute
+  '/portal/apply': typeof PortalApplyRoute
+  '/portal/confirmation': typeof PortalConfirmationRoute
   '/portal/login': typeof PortalLoginRoute
   '/portal/register': typeof PortalRegisterRoute
   '/academics/': typeof AcademicsIndexRoute
@@ -100,12 +128,16 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/admissions': typeof AdmissionsRoute
   '/campus-life': typeof CampusLifeRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/news': typeof NewsRoute
   '/research': typeof ResearchRoute
   '/academics/$slug': typeof AcademicsSlugRoute
+  '/portal/apply': typeof PortalApplyRoute
+  '/portal/confirmation': typeof PortalConfirmationRoute
   '/portal/login': typeof PortalLoginRoute
   '/portal/register': typeof PortalRegisterRoute
   '/academics': typeof AcademicsIndexRoute
@@ -115,12 +147,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/admissions': typeof AdmissionsRoute
   '/campus-life': typeof CampusLifeRoute
   '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRoute
   '/news': typeof NewsRoute
   '/research': typeof ResearchRoute
   '/academics/$slug': typeof AcademicsSlugRoute
+  '/portal/apply': typeof PortalApplyRoute
+  '/portal/confirmation': typeof PortalConfirmationRoute
   '/portal/login': typeof PortalLoginRoute
   '/portal/register': typeof PortalRegisterRoute
   '/academics/': typeof AcademicsIndexRoute
@@ -131,12 +167,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/admissions'
     | '/campus-life'
     | '/contact'
+    | '/dashboard'
     | '/news'
     | '/research'
     | '/academics/$slug'
+    | '/portal/apply'
+    | '/portal/confirmation'
     | '/portal/login'
     | '/portal/register'
     | '/academics/'
@@ -145,12 +185,16 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/admin'
     | '/admissions'
     | '/campus-life'
     | '/contact'
+    | '/dashboard'
     | '/news'
     | '/research'
     | '/academics/$slug'
+    | '/portal/apply'
+    | '/portal/confirmation'
     | '/portal/login'
     | '/portal/register'
     | '/academics'
@@ -159,12 +203,16 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/admissions'
     | '/campus-life'
     | '/contact'
+    | '/dashboard'
     | '/news'
     | '/research'
     | '/academics/$slug'
+    | '/portal/apply'
+    | '/portal/confirmation'
     | '/portal/login'
     | '/portal/register'
     | '/academics/'
@@ -174,12 +222,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   AdmissionsRoute: typeof AdmissionsRoute
   CampusLifeRoute: typeof CampusLifeRoute
   ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRoute
   NewsRoute: typeof NewsRoute
   ResearchRoute: typeof ResearchRoute
   AcademicsSlugRoute: typeof AcademicsSlugRoute
+  PortalApplyRoute: typeof PortalApplyRoute
+  PortalConfirmationRoute: typeof PortalConfirmationRoute
   PortalLoginRoute: typeof PortalLoginRoute
   PortalRegisterRoute: typeof PortalRegisterRoute
   AcademicsIndexRoute: typeof AcademicsIndexRoute
@@ -202,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admissions': {
       id: '/admissions'
       path: '/admissions'
@@ -221,6 +280,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news': {
@@ -258,6 +324,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/apply': {
+      id: '/portal/apply'
+      path: '/portal/apply'
+      fullPath: '/portal/apply'
+      preLoaderRoute: typeof PortalApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/confirmation': {
+      id: '/portal/confirmation'
+      path: '/portal/confirmation'
+      fullPath: '/portal/confirmation'
+      preLoaderRoute: typeof PortalConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portal/login': {
       id: '/portal/login'
       path: '/portal/login'
@@ -278,12 +358,16 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   AdmissionsRoute: AdmissionsRoute,
   CampusLifeRoute: CampusLifeRoute,
   ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRoute,
   NewsRoute: NewsRoute,
   ResearchRoute: ResearchRoute,
   AcademicsSlugRoute: AcademicsSlugRoute,
+  PortalApplyRoute: PortalApplyRoute,
+  PortalConfirmationRoute: PortalConfirmationRoute,
   PortalLoginRoute: PortalLoginRoute,
   PortalRegisterRoute: PortalRegisterRoute,
   AcademicsIndexRoute: AcademicsIndexRoute,
