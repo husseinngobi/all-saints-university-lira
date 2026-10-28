@@ -18,6 +18,9 @@ import { Route as NewsRouteImport } from './routes/news'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as AcademicsIndexRouteImport } from './routes/academics.index'
 import { Route as AcademicsSlugRouteImport } from './routes/academics.$slug'
+import { Route as PortalIndexRouteImport } from './routes/portal.index'
+import { Route as PortalLoginRouteImport } from './routes/portal.login'
+import { Route as PortalRegisterRouteImport } from './routes/portal.register'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +67,21 @@ const AcademicsSlugRoute = AcademicsSlugRouteImport.update({
   path: '/academics/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
+  id: '/portal/',
+  path: '/portal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalLoginRoute = PortalLoginRouteImport.update({
+  id: '/portal/login',
+  path: '/portal/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalRegisterRoute = PortalRegisterRouteImport.update({
+  id: '/portal/register',
+  path: '/portal/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,7 +92,10 @@ export interface FileRoutesByFullPath {
   '/news': typeof NewsRoute
   '/research': typeof ResearchRoute
   '/academics/$slug': typeof AcademicsSlugRoute
+  '/portal/login': typeof PortalLoginRoute
+  '/portal/register': typeof PortalRegisterRoute
   '/academics/': typeof AcademicsIndexRoute
+  '/portal/': typeof PortalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,7 +106,10 @@ export interface FileRoutesByTo {
   '/news': typeof NewsRoute
   '/research': typeof ResearchRoute
   '/academics/$slug': typeof AcademicsSlugRoute
+  '/portal/login': typeof PortalLoginRoute
+  '/portal/register': typeof PortalRegisterRoute
   '/academics': typeof AcademicsIndexRoute
+  '/portal': typeof PortalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -97,7 +121,10 @@ export interface FileRoutesById {
   '/news': typeof NewsRoute
   '/research': typeof ResearchRoute
   '/academics/$slug': typeof AcademicsSlugRoute
+  '/portal/login': typeof PortalLoginRoute
+  '/portal/register': typeof PortalRegisterRoute
   '/academics/': typeof AcademicsIndexRoute
+  '/portal/': typeof PortalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -110,7 +137,10 @@ export interface FileRouteTypes {
     | '/news'
     | '/research'
     | '/academics/$slug'
+    | '/portal/login'
+    | '/portal/register'
     | '/academics/'
+    | '/portal/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -121,7 +151,10 @@ export interface FileRouteTypes {
     | '/news'
     | '/research'
     | '/academics/$slug'
+    | '/portal/login'
+    | '/portal/register'
     | '/academics'
+    | '/portal'
   id:
     | '__root__'
     | '/'
@@ -132,7 +165,10 @@ export interface FileRouteTypes {
     | '/news'
     | '/research'
     | '/academics/$slug'
+    | '/portal/login'
+    | '/portal/register'
     | '/academics/'
+    | '/portal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -144,7 +180,10 @@ export interface RootRouteChildren {
   NewsRoute: typeof NewsRoute
   ResearchRoute: typeof ResearchRoute
   AcademicsSlugRoute: typeof AcademicsSlugRoute
+  PortalLoginRoute: typeof PortalLoginRoute
+  PortalRegisterRoute: typeof PortalRegisterRoute
   AcademicsIndexRoute: typeof AcademicsIndexRoute
+  PortalIndexRoute: typeof PortalIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +251,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcademicsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/': {
+      id: '/portal/'
+      path: '/portal'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/login': {
+      id: '/portal/login'
+      path: '/portal/login'
+      fullPath: '/portal/login'
+      preLoaderRoute: typeof PortalLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/register': {
+      id: '/portal/register'
+      path: '/portal/register'
+      fullPath: '/portal/register'
+      preLoaderRoute: typeof PortalRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -224,7 +284,10 @@ const rootRouteChildren: RootRouteChildren = {
   NewsRoute: NewsRoute,
   ResearchRoute: ResearchRoute,
   AcademicsSlugRoute: AcademicsSlugRoute,
+  PortalLoginRoute: PortalLoginRoute,
+  PortalRegisterRoute: PortalRegisterRoute,
   AcademicsIndexRoute: AcademicsIndexRoute,
+  PortalIndexRoute: PortalIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
