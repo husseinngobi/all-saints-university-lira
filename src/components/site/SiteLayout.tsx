@@ -4,6 +4,8 @@ import { Menu, X, ChevronRight, Facebook, Twitter, Instagram, Linkedin, Youtube,
 import { useDemo } from "@/lib/demo-store";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { MegaNav } from "./MegaNav";
+import { ChatAssistant } from "./ChatAssistant";
 
 export const navItems = [
   { to: "/", label: "Home" },
@@ -50,21 +52,10 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40">
       <AnnouncementBar />
-      <div className="border-b bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 lg:px-8">
+      <div className="relative border-b bg-background/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 xl:py-0 lg:px-8">
           <Logo />
-          <nav className="hidden items-center gap-5 xl:flex">
-            {navItems.map((n) => (
-              <Link
-                key={n.to}
-                to={n.to}
-                activeOptions={{ exact: n.to === "/" }}
-                className="text-sm font-medium text-foreground/80 transition-colors hover:text-royal data-[status=active]:text-royal"
-              >
-                {n.label}
-              </Link>
-            ))}
-          </nav>
+          <MegaNav />
           <div className="hidden items-center gap-2 xl:flex">
             <Button asChild variant="outline" size="sm" className="rounded-sm border-navy text-navy">
               <Link to="/portal/login">Student Portal</Link>
@@ -157,6 +148,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <SiteHeader />
       <main className="flex-1">{children}</main>
       <SiteFooter />
+      <ChatAssistant />
     </div>
   );
 }
