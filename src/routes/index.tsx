@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Lightbulb, Briefcase, HeartHandshake, Users, Cpu, TrendingUp, Stethoscope, Leaf, Quote } from "lucide-react";
 import { SiteLayout, SampleTag } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
@@ -33,11 +33,56 @@ function Home() {
   );
 }
 
+// Set to a video URL (e.g. an .asset.json pointer's .url) to fade from the photo into background video.
+const HERO_VIDEO: string | null = null;
+const heroSlides = [
+  { src: images.hero, label: "Campus" },
+  { src: images.lab, label: "Innovation Labs" },
+  { src: images.lecture, label: "Teaching" },
+  { src: images.graduation, label: "Graduation" },
+];
+
 function Hero() {
+  const [i, setI] = useState(0);
+  const [videoReady, setVideoReady] = useState(false);
+  useEffect(() => {
+    if (HERO_VIDEO) return;
+    const t = setInterval(() => setI((n) => (n + 1) % heroSlides.length), 6000);
+    return () => clearInterval(t);
+  }, []);
   return (
     <section className="relative isolate flex min-h-[88vh] items-end overflow-hidden bg-navy text-navy-foreground">
-      <img src={images.hero} alt="University students walking across a green campus" width={1920} height={1088} className="absolute inset-0 -z-10 h-full w-full object-cover" />
+      {heroSlides.map((s, n) => (
+        <img
+          key={s.label}
+          src={s.src}
+          alt={n === 0 ? "University students on campus" : ""}
+          width={1920}
+          height={1088}
+          className={`absolute inset-0 -z-10 h-full w-full object-cover transition-opacity duration-[1500ms] ${n === i && !videoReady ? "opacity-100 hero-kenburns" : "opacity-0"}`}
+        />
+      ))}
+      {HERO_VIDEO && (
+        <video
+          src={HERO_VIDEO}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onPlaying={() => setVideoReady(true)}
+          className={`absolute inset-0 -z-10 h-full w-full object-cover transition-opacity duration-[2000ms] ${videoReady ? "opacity-100" : "opacity-0"}`}
+        />
+      )}
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy via-navy/60 to-navy/20" />
+      {!HERO_VIDEO && (
+        <div className="absolute bottom-8 right-6 hidden gap-2 md:flex lg:right-10">
+          {heroSlides.map((s, n) => (
+            <button key={s.label} onClick={() => setI(n)} className={`border-b-2 px-1 pb-1 text-xs uppercase tracking-wider transition-colors ${n === i ? "border-gold text-gold" : "border-transparent opacity-70 hover:opacity-100"}`}>
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
       <div className="mx-auto w-full max-w-7xl px-4 pb-24 pt-32 lg:px-8">
         <p className="eyebrow text-gold animate-in fade-in slide-in-from-bottom-2 duration-700">All Saints University · Lira, Uganda</p>
         <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[1.05] md:text-7xl animate-in fade-in slide-in-from-bottom-4 duration-700">

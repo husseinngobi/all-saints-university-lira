@@ -123,6 +123,15 @@
   text-transform: uppercase;
 }
 
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.12) translate(-1.5%, -1%); }
+}
+
+@utility hero-kenburns {
+  animation: kenburns 9s ease-out forwards;
+}
+
 @utility gold-rule {
   &::before {
     content: "";

@@ -36,6 +36,29 @@ function PortalLanding() {
           </div>
         </div>
       </section>
+      <section className="border-b bg-soft">
+        <div className="mx-auto max-w-6xl px-4 py-12">
+          <p className="eyebrow text-royal">How applying works</p>
+          <h2 className="mt-2 text-3xl font-semibold text-navy">New applicant? No prior login needed.</h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">First-time applicants create a free applicant account in under a minute. That account saves your form, links your payment to your application, and lets you track your decision later.</p>
+          <ol className="mt-8 grid gap-4 md:grid-cols-5">
+            {[
+              ["Create account", "Name, email & phone. A verification code is sent by SMS (simulated)."],
+              ["Fill the form", "Personal details, academics, programme choice. Saves automatically."],
+              ["Upload documents", "Result slips, ID and passport photo."],
+              ["Pay the fee", `${formatUGX(APPLICATION_FEE)} via MTN MoMo, Airtel Money or card — you approve on your phone.`],
+              ["Get your receipt", "Instant reference number, receipt by email/SMS, then track status."],
+            ].map(([t, d], n) => (
+              <li key={t} className="relative border-t-2 border-navy bg-background p-5">
+                <span className="font-display text-3xl text-gold">0{n + 1}</span>
+                <p className="mt-2 font-semibold text-navy">{t}</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{d}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-6 text-sm text-muted-foreground">Already started? <Link to="/portal/login" className="font-semibold text-royal hover:underline">Log in to continue</Link> — your progress and payment status are saved.</p>
+        </div>
+      </section>
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-12 lg:grid-cols-3">
         <div className="border bg-background p-6 lg:col-span-2">
           <h2 className="flex items-center gap-2 text-xl font-semibold text-navy"><FileText className="h-5 w-5 text-royal" /> Application instructions</h2>
