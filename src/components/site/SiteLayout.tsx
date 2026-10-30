@@ -132,11 +132,14 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
     <div>
       <h4 className="eyebrow mb-4 text-gold">{title}</h4>
       <ul className="space-y-2.5 text-sm">
-        {links.map(([l, to]) => (
-          <li key={l}>
-            <Link to={to as "/"} className="opacity-80 transition-opacity hover:opacity-100 hover:text-gold">{l}</Link>
-          </li>
-        ))}
+        {links.map(([l, to]) => {
+          const [path, hash] = to.split("#");
+          return (
+            <li key={l}>
+              <Link to={path as "/"} hash={hash} className="opacity-80 transition-opacity hover:opacity-100 hover:text-gold">{l}</Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
