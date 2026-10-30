@@ -109,7 +109,7 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
-        <FooterCol title="University" links={[["About Us", "/about"], ["Research & Innovation", "/research"], ["Campus Life", "/campus-life"], ["News & Events", "/news"], ["Contact", "/contact"]]} />
+        <FooterCol title="University" links={[["About Us", "/about"], ["Research & Innovation", "/research"], ["Campus Life", "/campus-life"], ["Gallery", "/#gallery"], ["News & Events", "/news"], ["Contact", "/contact"]]} />
         <FooterCol title="Admissions" links={[["How to Apply", "/admissions"], ["Apply Online", "/portal"], ["Applicant Login", "/portal/login"], ["Create Account", "/portal/register"]]} />
         <FooterCol title="Academics" links={[["All Programmes", "/academics"], ["Computer Science", "/academics/computer-science"], ["Business Administration", "/academics/business-administration"], ["Staff Admin (Demo)", "/admin"]]} />
       </div>

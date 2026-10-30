@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { programmes, images } from "@/lib/data";
 
-type Item = { label: string; to: string; desc?: string };
+type Item = { label: string; to: string; desc?: string; hash?: string };
 type Menu = { label: string; to: string; cols?: { title: string; items: Item[] }[]; feature?: { title: string; text: string; image: string; to: string } };
 
 function facultyCols() {
@@ -52,7 +52,7 @@ export const menus: Menu[] = [
     cols: [{ title: "Student Life", items: [
       { label: "Accommodation", to: "/campus-life", desc: "Halls and hostels" },
       { label: "Clubs & Sports", to: "/campus-life", desc: "Guild, chaplaincy, teams" },
-      { label: "Gallery", to: "/#gallery", desc: "Sports, culture and events" },
+      { label: "Gallery", to: "/", hash: "gallery", desc: "Sports, culture and events" },
       { label: "Student Support", to: "/campus-life", desc: "Counselling and careers" },
     ] }],
     feature: { title: "Life @ All Saints", text: "Community, worship and friendship.", image: images.campus, to: "/campus-life" },
@@ -84,7 +84,7 @@ export function MegaNav() {
                       <ul className="space-y-1">
                         {c.items.map((it) => (
                           <li key={it.label}>
-                            <Link to={it.to as "/"} className="group/i block border-l-2 border-transparent px-3 py-2 transition-colors hover:border-gold hover:bg-soft">
+                            <Link to={it.to as "/"} hash={it.hash} className="group/i block border-l-2 border-transparent px-3 py-2 transition-colors hover:border-gold hover:bg-soft">
                               <span className="flex items-center gap-1 text-sm font-medium text-navy">{it.label}<ArrowRight className="h-3 w-3 -translate-x-1 opacity-0 transition-all group-hover/i:translate-x-0 group-hover/i:opacity-100" /></span>
                               {it.desc && <span className="block text-xs text-muted-foreground">{it.desc}</span>}
                             </Link>
