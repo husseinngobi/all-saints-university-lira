@@ -109,7 +109,7 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
-        <FooterCol title="University" links={[["About Us", "/about"], ["Research & Innovation", "/research"], ["Campus Life", "/campus-life"], ["News & Events", "/news"], ["Contact", "/contact"]]} />
+        <FooterCol title="University" links={[["About Us", "/about"], ["Research & Innovation", "/research"], ["Campus Life", "/campus-life"], ["Gallery", "/#gallery"], ["News & Events", "/news"], ["Contact", "/contact"]]} />
         <FooterCol title="Admissions" links={[["How to Apply", "/admissions"], ["Apply Online", "/portal"], ["Applicant Login", "/portal/login"], ["Create Account", "/portal/register"]]} />
         <FooterCol title="Academics" links={[["All Programmes", "/academics"], ["Computer Science", "/academics/computer-science"], ["Business Administration", "/academics/business-administration"], ["Staff Admin (Demo)", "/admin"]]} />
       </div>
@@ -132,11 +132,14 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
     <div>
       <h4 className="eyebrow mb-4 text-gold">{title}</h4>
       <ul className="space-y-2.5 text-sm">
-        {links.map(([l, to]) => (
-          <li key={l}>
-            <Link to={to as "/"} className="opacity-80 transition-opacity hover:opacity-100 hover:text-gold">{l}</Link>
-          </li>
-        ))}
+        {links.map(([l, to]) => {
+          const [path, hash] = to.split("#");
+          return (
+            <li key={l}>
+              <Link to={path as "/"} hash={hash} className="opacity-80 transition-opacity hover:opacity-100 hover:text-gold">{l}</Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
