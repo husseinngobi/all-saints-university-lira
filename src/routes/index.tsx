@@ -1,9 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Lightbulb, Briefcase, HeartHandshake, Users, Cpu, TrendingUp, Stethoscope, Leaf, Quote } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Lightbulb, Briefcase, HeartHandshake, Users, Cpu, TrendingUp, Stethoscope, Leaf, Quote, X } from "lucide-react";
 import { SiteLayout, SampleTag } from "@/components/site/SiteLayout";
 import { Button } from "@/components/ui/button";
 import { images, programmes, news, testimonials } from "@/lib/data";
+import imgSports from "@/assets/sports.jpg";
+import imgWorkshop from "@/assets/workshop.jpg";
+import imgCulture from "@/assets/culture.jpg";
+import imgOutreach from "@/assets/outreach.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,6 +30,7 @@ function Home() {
       <WhyUs />
       <AdmissionsBand />
       <CampusLife />
+      <Gallery />
       <Research />
       <News />
       <Testimonials />
