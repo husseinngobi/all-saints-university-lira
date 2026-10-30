@@ -245,6 +245,82 @@ function Tile({ img, label, className = "" }: { img: string; label: string; clas
   );
 }
 
+type GalleryItem = { src: string; title: string; cat: string; caption: string };
+const galleryItems: GalleryItem[] = [
+  { src: imgSports, title: "Inter-Faculty Football League", cat: "Sports", caption: "Weekly fixtures on the main pitch — football, netball and athletics." },
+  { src: imgWorkshop, title: "Coding & Innovation Workshop", cat: "Innovation", caption: "Hands-on sessions in the Centre of Excellence ICT labs." },
+  { src: imgCulture, title: "Cultural Gala Night", cat: "Culture", caption: "Traditional dance, music and drama celebrating our heritage." },
+  { src: imgOutreach, title: "Community Health Outreach", cat: "Community", caption: "Students serving villages across Lango with free health checks." },
+  { src: images.graduation, title: "Graduation Ceremony", cat: "Culture", caption: "Celebrating our newest graduates with family and friends." },
+  { src: images.lab, title: "Science Practical Sessions", cat: "Innovation", caption: "Laboratory work that turns theory into skill." },
+  { src: images.campus, title: "Life on Campus", cat: "Community", caption: "Friendships and fellowship between lectures." },
+  { src: images.lecture, title: "Guest Lecture Series", cat: "Innovation", caption: "Industry leaders and researchers sharing insight with students." },
+];
+const galleryCats = ["All", "Sports", "Innovation", "Culture", "Community"];
+
+function Gallery() {
+  const [cat, setCat] = useState("All");
+  const [open, setOpen] = useState<GalleryItem | null>(null);
+  const shown = cat === "All" ? galleryItems : galleryItems.filter((g) => g.cat === cat);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+  return (
+    <section id="gallery" className="bg-soft py-24">
+      <div className="mx-auto max-w-7xl px-4 lg:px-8">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p className="eyebrow gold-rule text-royal">Gallery</p>
+            <h2 className="text-4xl font-semibold text-navy md:text-5xl">Moments at All Saints</h2>
+            <p className="mt-3 max-w-xl text-muted-foreground">Sports, workshops, culture and community — a glimpse of university life. <SampleTag>Representative imagery</SampleTag></p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {galleryCats.map((c) => (
+              <button
+                key={c}
+                onClick={() => setCat(c)}
+                className={`border px-4 py-2 text-sm font-medium transition-colors ${cat === c ? "border-navy bg-navy text-navy-foreground" : "border-border bg-background text-foreground/70 hover:border-gold hover:text-royal"}`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {shown.map((g) => (
+            <button key={g.title} onClick={() => setOpen(g)} className="group relative aspect-[4/3] overflow-hidden text-left">
+              <img src={g.src} alt={g.title} loading="lazy" width={1024} height={768} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/10 to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
+              <div className="absolute inset-x-0 bottom-0 p-4">
+                <p className="eyebrow !text-[0.6rem] text-gold">{g.cat}</p>
+                <p className="mt-1 font-display text-lg leading-snug text-navy-foreground">{g.title}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/90 p-4 backdrop-blur-sm" onClick={() => setOpen(null)} role="dialog" aria-modal="true" aria-label={open.title}>
+          <div className="relative max-w-4xl" onClick={(e) => e.stopPropagation()}>
+            <img src={open.src} alt={open.title} className="max-h-[75vh] w-full object-contain" />
+            <div className="bg-background p-5">
+              <p className="eyebrow text-royal">{open.cat}</p>
+              <p className="mt-1 font-display text-2xl text-navy">{open.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{open.caption}</p>
+            </div>
+            <button onClick={() => setOpen(null)} aria-label="Close" className="absolute -right-3 -top-3 grid h-10 w-10 place-items-center bg-gold text-gold-foreground hover:bg-gold/90">
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function Research() {
   const themes = [
     { icon: Cpu, t: "Technology", d: "Digital tools for agriculture, education and public services." },

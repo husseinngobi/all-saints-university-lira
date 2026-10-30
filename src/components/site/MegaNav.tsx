@@ -52,6 +52,7 @@ export const menus: Menu[] = [
     cols: [{ title: "Student Life", items: [
       { label: "Accommodation", to: "/campus-life", desc: "Halls and hostels" },
       { label: "Clubs & Sports", to: "/campus-life", desc: "Guild, chaplaincy, teams" },
+      { label: "Gallery", to: "/#gallery", desc: "Sports, culture and events" },
       { label: "Student Support", to: "/campus-life", desc: "Counselling and careers" },
     ] }],
     feature: { title: "Life @ All Saints", text: "Community, worship and friendship.", image: images.campus, to: "/campus-life" },
