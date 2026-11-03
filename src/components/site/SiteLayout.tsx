@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { MegaNav } from "./MegaNav";
 import { ChatAssistant } from "./ChatAssistant";
+import { ThemePicker } from "@/components/ThemePicker";
 
 export const navItems = [
   { to: "/", label: "Home" },
@@ -64,9 +65,12 @@ export function SiteHeader() {
               <Link to="/portal">Apply Now</Link>
             </Button>
           </div>
+          <div className="flex shrink-0 items-center gap-1">
+          <ThemePicker />
           <button className="p-2 xl:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
             {open ? <X /> : <Menu />}
           </button>
+          </div>
         </div>
         {open && (
           <div className="border-t bg-background px-4 pb-6 xl:hidden">
