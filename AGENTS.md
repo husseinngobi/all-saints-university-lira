@@ -11,3 +11,4 @@
 - TypeScript runs strict but without noUncheckedIndexedAccess/exactOptionalPropertyTypes/noPropertyAccessFromIndexSignature/noImplicitReturns — demo data code relies on indexed access; keep these off unless refactoring all data access.
 - Use the root ThemeProvider and shared ThemePicker for appearance; store only the device appearance preference locally and apply browser APIs after hydration to preserve SSR consistency.
 - Keep navy banner/sidebar backgrounds stable while adapting surface and text tokens in dark mode, so photographic overlays retain contrast.
+- Use the shared menu definitions for desktop click-to-expand navigation and compact accordions, so both expose the same destinations.

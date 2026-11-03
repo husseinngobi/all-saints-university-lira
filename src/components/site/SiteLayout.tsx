@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Menu, X, ChevronRight, Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Menu, X, ChevronRight, ChevronDown, Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { useDemo } from "@/lib/demo-store";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { MegaNav } from "./MegaNav";
+import { MegaNav, menus } from "./MegaNav";
 import { ChatAssistant } from "./ChatAssistant";
 import { ThemePicker } from "@/components/ThemePicker";
 
@@ -50,6 +50,8 @@ function AnnouncementBar() {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const closeMenu = () => { setOpen(false); setExpanded(null); };
   return (
     <header className="sticky top-0 z-40">
       <AnnouncementBar />
@@ -67,23 +69,37 @@ export function SiteHeader() {
           </div>
           <div className="flex shrink-0 items-center gap-1">
           <ThemePicker />
-          <button className="p-2 xl:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+          <Button variant="ghost" size="icon" className="xl:hidden" onClick={() => { setOpen(!open); setExpanded(null); }} aria-label="Toggle menu" aria-expanded={open} aria-controls="compact-navigation">
             {open ? <X /> : <Menu />}
-          </button>
+          </Button>
           </div>
         </div>
         {open && (
-          <div className="border-t bg-background px-4 pb-6 xl:hidden">
-            {navItems.map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="block border-b py-3 font-medium">
-                {n.label}
-              </Link>
+          <nav id="compact-navigation" aria-label="Main navigation" className="max-h-[calc(100dvh-8rem)] overflow-y-auto border-t bg-background px-4 pb-6 xl:hidden">
+            {menus.map((n) => (
+              <div key={n.to} className="border-b">
+                {n.cols ? <>
+                  <Button variant="ghost" onClick={() => setExpanded(expanded === n.label ? null : n.label)} aria-expanded={expanded === n.label} aria-controls={`compact-${n.to.slice(1)}`} className="h-auto w-full justify-between rounded-none px-0 py-3 font-medium">
+                    {n.label}<ChevronDown className={`transition-transform ${expanded === n.label ? "rotate-180" : ""}`} />
+                  </Button>
+                  {expanded === n.label && <div id={`compact-${n.to.slice(1)}`} className="space-y-4 bg-soft px-4 py-4">
+                    <Link to={n.to as "/"} onClick={closeMenu} className="block text-sm font-semibold text-royal">{n.label} overview</Link>
+                    {n.cols.map((column) => <div key={column.title}>
+                      <p className="eyebrow mb-2 text-muted-foreground">{column.title}</p>
+                      {column.items.map((item) => <Link key={item.label} to={item.to as "/"} hash={item.hash} onClick={closeMenu} className="block border-l-2 border-transparent py-2 pl-3 hover:border-gold">
+                        <span className="block text-sm font-medium text-foreground">{item.label}</span>
+                        {item.desc && <span className="block text-xs text-muted-foreground">{item.desc}</span>}
+                      </Link>)}
+                    </div>)}
+                  </div>}
+                </> : <Link to={n.to as "/"} onClick={closeMenu} className="block py-3 font-medium">{n.label}</Link>}
+              </div>
             ))}
             <div className="mt-4 grid grid-cols-2 gap-2">
               <Button asChild variant="outline" className="rounded-sm"><Link to="/portal/login">Student Portal</Link></Button>
               <Button asChild className="rounded-sm"><Link to="/portal">Apply Now</Link></Button>
             </div>
-          </div>
+          </nav>
         )}
       </div>
     </header>
