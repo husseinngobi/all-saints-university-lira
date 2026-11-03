@@ -3,6 +3,7 @@ import { Menu } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site/SiteLayout";
 import { DemoBadge } from "./PortalShell";
+import { ThemePicker } from "@/components/ThemePicker";
 
 export type NavItem = { id: string; label: string; icon: LucideIcon };
 
@@ -27,7 +28,7 @@ export function DashShell({ items, active, onSelect, title, footer, children }: 
         <header className="flex items-center justify-between border-b bg-background px-4 py-3 lg:px-8">
           <button className="lg:hidden" onClick={() => setOpen(true)} aria-label="Menu"><Menu /></button>
           <p className="font-semibold text-navy">{items.find((i) => i.id === active)?.label}</p>
-          <DemoBadge>Demo data</DemoBadge>
+          <div className="flex items-center gap-3"><ThemePicker /><DemoBadge>Demo data</DemoBadge></div>
         </header>
         <main className="p-4 lg:p-8">{children}</main>
       </div>

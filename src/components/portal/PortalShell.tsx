@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Logo } from "@/components/site/SiteLayout";
+import { ThemePicker } from "@/components/ThemePicker";
 
 export function DemoBadge({ children = "Demo only" }: { children?: ReactNode }) {
   return <span className="inline-flex items-center rounded-sm bg-gold px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider text-gold-foreground">{children}</span>;
@@ -17,6 +18,7 @@ export function PortalShell({ children, right }: { children: ReactNode; right?: 
             <DemoBadge>Demo</DemoBadge>
           </div>
           <div className="flex items-center gap-4 text-sm">
+            <ThemePicker />
             {right}
             <Link to="/" className="text-muted-foreground hover:text-royal">← Main website</Link>
           </div>
